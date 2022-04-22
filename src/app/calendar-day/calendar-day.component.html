@@ -1,0 +1,8 @@
+<div *ngIf="data.length; else nodata" #container class="yes-data" (click)="divClicked(container)">
+    <p class="day">{{data[0].substring(8,10)}}</p>
+    <select *ngIf="!filtered" class="select" (change)="changeData($event)" (click)="selectClicked($event)">
+        <option *ngFor="let op of currentDataChoiceTitle">{{op}}</option>
+    </select>
+    <p>{{"Price : " + data[currentDataChoice + 1] }}</p>
+</div>
+<ng-template #nodata><span class="no-data"></span></ng-template>

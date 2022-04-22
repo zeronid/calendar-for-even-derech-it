@@ -1,0 +1,33 @@
+<div class="sort-container">
+    <h1>Sort By</h1>
+    <select class="select" (change)="filterData($event)">
+        <option *ngFor="let _ of sortingOptions">{{_}}</option>
+    </select>
+    <button (click)="getBiggestDifference()">Show Biggest Difference Between High And Low</button>
+</div>
+<div class="container">
+    <div class="calendar-container" *ngIf="!filteredData.length">
+        <div *ngFor="let _ of [].constructor(numberOfDays); let i = index" class="day-container">
+            <app-calendar-day (updateFullData)="setSelectedDay($event)" [selectedDiv]="selectedDay"
+                [data]="getData(i+1)" [biggestDifferences]="biggestDifferences"></app-calendar-day>
+        </div>
+    </div>
+    <div class="filtered-calendar" *ngIf="filteredData.length">
+        <div class="day-container" *ngFor="let _ of filteredData">
+            <app-calendar-day [data]="_" [filtered]=true></app-calendar-day>
+        </div>
+    </div>
+    <div *ngIf="selectedDay.length" class="full-data-container">
+        <p class="bold-big-text">Date: </p>
+        <!-- Using the date pipe :) -->
+        <p>{{selectedDay[0] | date}}</p>
+        <p class="bold-big-text">Open: </p>
+        <p>{{selectedDay[1]}}</p>
+        <p class="bold-big-text">High: </p>
+        <p>{{selectedDay[2]}}</p>
+        <p class="bold-big-text">Low: </p>
+        <p>{{selectedDay[3]}}</p>
+        <p class="bold-big-text">Close: </p>
+        <p>{{selectedDay[4]}}</p>
+    </div>
+</div>
